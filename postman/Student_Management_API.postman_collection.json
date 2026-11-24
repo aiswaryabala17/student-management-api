@@ -1,0 +1,181 @@
+{
+  "info": {
+    "_postman_id": "9a38f322-a720-4e4b-9721-e0c1b7e6f112",
+    "name": "Student Management REST API - Module 03",
+    "description": "Postman test collection for Week 3 Student Management REST API developed with Node.js, Express.js, and MySQL by U B Aiswarya.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health & Database Connectivity Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "health"]
+        },
+        "description": "Verifies that the server is alive and reports MySQL database connection status."
+      }
+    },
+    {
+      "name": "2. API Overview",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": ["{{baseUrl}}"],
+          "path": [""]
+        },
+        "description": "Returns metadata and endpoints catalog."
+      }
+    },
+    {
+      "name": "3. Register New Student (POST)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"STU-2024-006\",\n  \"full_name\": \"Meera Nambiar\",\n  \"email\": \"meera.n@example.com\",\n  \"phone\": \"9871234560\",\n  \"dob\": \"2004-01-18\",\n  \"gender\": \"Female\",\n  \"department\": \"Information Technology\",\n  \"semester\": \"Semester 6\",\n  \"cgpa\": 9.15,\n  \"status\": \"Active\",\n  \"address\": \"Kochi, Kerala\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/students",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students"]
+        },
+        "description": "Registers a new student with input validation."
+      }
+    },
+    {
+      "name": "4. Retrieve All Students (GET)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students"]
+        },
+        "description": "Retrieves the list of all registered students."
+      }
+    },
+    {
+      "name": "5. Search Students (GET with search query)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students?search=Aiswarya",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students"],
+          "query": [
+            {
+              "key": "search",
+              "value": "Aiswarya"
+            }
+          ]
+        },
+        "description": "Searches students by name, ID, or email."
+      }
+    },
+    {
+      "name": "6. Filter by Department & Sort (GET)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students?department=Computer Science & Engineering&sortBy=cgpa-desc",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students"],
+          "query": [
+            {
+              "key": "department",
+              "value": "Computer Science & Engineering"
+            },
+            {
+              "key": "sortBy",
+              "value": "cgpa-desc"
+            }
+          ]
+        },
+        "description": "Filters students by department and sorts by highest CGPA."
+      }
+    },
+    {
+      "name": "7. Retrieve Student by ID (GET)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students/STU-2024-002",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students", "STU-2024-002"]
+        },
+        "description": "Retrieves a single student's complete record by ID."
+      }
+    },
+    {
+      "name": "8. Update Student Details (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"semester\": \"Semester 8\",\n  \"cgpa\": 9.45,\n  \"phone\": \"9123456789\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/students/STU-2024-002",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students", "STU-2024-002"]
+        },
+        "description": "Updates student information."
+      }
+    },
+    {
+      "name": "9. Get Student Statistics (GET)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students/stats/summary",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students", "stats", "summary"]
+        },
+        "description": "Returns counts, average CGPA, and gender distribution."
+      }
+    },
+    {
+      "name": "10. Delete Student by ID (DELETE)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students/STU-2024-006",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students", "STU-2024-006"]
+        },
+        "description": "Removes a student record by ID."
+      }
+    }
+  ]
+}
